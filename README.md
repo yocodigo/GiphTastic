@@ -1,1 +1,1 @@
-# Giphy-API-Query
+# GiphTastic
