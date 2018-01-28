@@ -1,15 +1,16 @@
 <!-- 1. CONNECT TO GIPHY API -->
-<!-- 2. FORM INPUT VALUE:  
-        a. giphyQuery will be the input value, i.e. when clicking submit, function { var buttonQuery = $("<button>);, buttonQuery.attr("data-value", giphyQuery) -->
-        <!-- b. $("#giphyButtons").html(buttonQuery); -->
-<!-- 3. CREATE BUTTON: 
-        a. Array needed?
+<!-- Step 2: CREATE IMG & RATING -->
+<!-- 3. RENDER BUTTON: 
+        a. When clicked, for loop. each iteration will first delete current buttons and recreate them. query data is stored in an array
         b. var = $("<button data-value="">")
         a. Use "$("#buttons-view").empty();" (this is necessary otherwise you will have repeat buttons) 
         b. Array needed?-->
+<!-- 4. STORE QUERY VALUES    -->
 <!-- 4. CLICK BUTTON: -->
-<!-- 5. CLICK IMAGE:  -->
-
+<!-- Step 2: CREATE IMG & RATING -->
+<!-- 2. FORM INPUT VALUE:  
+        a. giphyQuery will be the input value, i.e. when clicking submit, function { var buttonQuery = $("<button>);, buttonQuery.attr("data-value", giphyQuery) -->
+        <!-- b. $("#giphyButtons").html(buttonQuery); -->
           
           <!-- a2. click event on button generates up to 10 images -->
 <!-- 3. takes input and creates button, button label, and click event appends images to gifArea.  -->
@@ -30,65 +31,98 @@
     <form><label>Enter an event</label><br><input type="text" name="Input" id="inputQuery" placeholder="i.e. birthday" value = ""><br><input type="submit" name="submit" class="submitQuery"></form>
     <div id="queryArea"></div>
     <div id="gifArea"></div>
-  <!--/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  -->
+
+
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
-    // Example queryURL for Giphy API
-    var passQuery = "text";
-    var giphyArray = []; 
-    var giphyQuery = "party";
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + giphyQuery + "&api_key=dc6zaTOxFJmzC&limit=10";
-    var url = "";
-    $.ajax({
-      url: queryURL,
-      method: 'GET' 
-    }).done(function(response) {
-      console.log(response);
-        
+/////////////////////////////////////////////////////////////////////////////    
+// GLOBAL VARIABLES
+var passQuery = "text";
+var giphyArray = []; 
+var giphyQuery = "party";
 /////////////////////////////////////////////////////////////////////////////
-//Step 3: CREATE IMG & RATING   
+//Step 1: Connect to Giphy API using Ajax
+var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + giphyQuery + "&api_key=dc6zaTOxFJmzC&limit=10";
+var url = "";
+$.ajax({
+  url: queryURL,
+  method: 'GET' 
+}).done(function(response) {
+  console.log(response);
+/////////////////////////////////////////////////////////////////////////////
+//Step 2: RENDER BUTTON
+    //When the submit button is clicked, do the following...
+    $(document).on("click", ".submitQuery", function() {
+        // debugger;
+      
+      for (var i = 0; i <= giphyArray.length; i++) {
+          //Stores the string from the form input into passQuery
+          var passQuery = $("#inputQuery").val().trim();
+          console.log(passQuery);
+          $("#inputQuery").attr("value", passQuery);
+          
+          giphyArray.push(passQuery);
+          
+          console.log($("#inputQuery"));
+          
+          var newButton = $("<button>");
+          
+          var arrayLastVal = giphyArray[giphyArray.length-1];
+          
+          newButton.attr("value", arrayLastVal);
+          
+          $("#giphyButtons").append({type: 'button', name: 'giphy button', value: passQuery});
+          // console.log($("#giphyButtons"));
+      }  
+    
+    });    
+/////////////////////////////////////////////////////////////////////////////
+//Step 3: CREATE IMG & RATING
+    $(document).on("click", "#giphyButtons", function() {
+
       for (var i = 0; i <= response.data.length; i++) {
+          
           url = response.data[i].images.original_still.url; 
+          
           var ratingText = $('<p class="rating">');
+          
           var rating = JSON.stringify(response.data[i].rating);
+          
           ratingText.text("Rating: " + rating);
+          
           $("#gifArea").append(ratingText);
+          
           var newImage = $('<img class="gif notPlaying">');
+          
           newImage.attr("src", response.data[i].images.original_still.url);
+          
           $("#gifArea").append(newImage);
       }    
+    
     });
 //////////////////////////////////////////////////////////////////////////////
 //Step 4    
     $(document).on("click", ".gif", function() {
       // console.log($(this));
          //debugger;
-        if($(this).hasClass("notPlaying")){
-            $(this).removeClass("notPlaying");
-            $(this).attr('src', url.replace(/\_s.gif/i, ".gif"));
-      //console.log(url);
-        }
-        else{
-             $(this).addClass('notPlaying');
-            $(this).attr('src', url.replace(/\.gif/i, ".gif"))
-        }
+      if($(this).hasClass("notPlaying")){
+         
+          $(this).removeClass("notPlaying");
+         
+          $(this).attr('src', url.replace(/\_s.gif/i, ".gif"));
+    //console.log(url);
+      }
+      else{
+         
+           $(this).addClass('notPlaying');
+         
+          $(this).attr('src', url.replace(/\.gif/i, ".gif"))
+      }
+    
     });
 ////////////////////////////////////////////////////////////////////////////
-    $(document).on("click", ".submitQuery", function() {
-        // debugger;
-        for (var i = 0; i >= 0; i--) {
-         [i]
-        }
-          var passQuery = $("#inputQuery").val().trim();
-          $("#inputQuery").attr("value", passQuery);
-          giphyArray.push(passQuery);
-          console.log($("#inputQuery"));
-          var newButton = $("<button>");
-          var arrayLastVal = giphyArray[giphyArray.length-1];
-          newButton.attr("value", arrayLastVal);
-          $("#giphyButtons").append({type: 'button', name: 'giphy button', value: passQuery});
-          // console.log($("#giphyButtons"));
-     });    
 
 
 </script>
