@@ -1,3 +1,8 @@
+body {
+	background-color: #e0e5f1;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%235d9bcb' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+}
+
 .row1 {
 	height: 30px;
 }
@@ -30,10 +35,13 @@
 }
 
 label {
+	text-align: center;
 	font-family: arial;
-	font-size: 15px;
+	font-size: 13px;
+	font-weight: bold;
 	margin-bottom: 4px;
-	letter-spacing: 7px;
+	margin-left: 10px; 
+	letter-spacing: 6px;
 }
 
 .submitQuery, #inputQuery {
@@ -42,6 +50,7 @@ label {
 	margin-bottom: 7px;
 	padding: 3px;
 	height: 30px;
+	letter-spacing: 2px;
 }
 
 .submitQuery {
