@@ -27,10 +27,25 @@
     <title>Giphy Homework</title>
 </head>
 <body>
-    <div id="giphyButtons"></div>
-    <form><label>Enter an event</label><br><input type="text" name="Input" id="inputQuery" placeholder="i.e. birthday" value = ""><br><input type="submit" name="submit" class="submitQuery"></form>
-    <div id="queryArea"></div>
-    <div id="gifArea"></div>
+  <div class="row1">
+    <div class="col-lg-12">
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-sm-2">
+      <form>
+        <label>Enter an event</label><br>
+        <input type="text" name="Input" id="inputQuery" placeholder="i.e. birthday" value = ""><br>
+        <input type="submit" name="submit" class="submitQuery">
+      </form>
+    </div>
+    <div class="col-lg-8">
+      <div id="giphyButtons"></div>
+    </div>
+  </div>  
+  <div class="row">
+     <div id="gifArea"></div>
+  </div>
 
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -71,7 +86,7 @@ $.ajax({
     });
 /////////////////////////////////////////////////////////////////////////////
 //Step 2: RENDER BUTTON
-    
+      
   function renderQueryButton() {   
     // debugger;
     $("#giphyButtons").empty(); 
@@ -95,9 +110,9 @@ $.ajax({
 
 //Step : CREATE IMG & RATING
   $(document).on("click", ".queryResult", function() {
+    debugger;
+    var giphyQuery = $(".queryResult").attr($("data-name"));
     
-    var giphyQuery = $(this).attr($("data-name"));
-
     for (var i = 0; i <= response.data.length; i++) {
         
         // url = response.data[i].images.original_still.url; 

@@ -1,16 +1,52 @@
+.row1 {
+	height: 30px;
+}
+
 #gifarea {
 	float: right;
+}
+
+.col-lg-8 {
+	width: 1000px;
 }
 
 .queryResult {
 	padding: 20px 40px;
 	font-size: 20px;
-	margin: 30px 30px;
-	background: #b54103;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	background: #b4cef7;
 	border-radius: 12px;
 	font-weight: 100;
 }
 
-form {
-	margin: 180px 30px;
+.col-sm-2 {
+	margin-left: 30px;
 }
+
+#giphyButtons {
+	float: left;
+	font-family: arial;
+}
+
+label {
+	font-family: arial;
+	font-size: 15px;
+	margin-bottom: 4px;
+	letter-spacing: 7px;
+}
+
+.submitQuery, #inputQuery {
+	font-family: arial;
+	font-size: 15px;
+	margin-bottom: 7px;
+	padding: 3px;
+	height: 30px;
+}
+
+.submitQuery {
+	padding: 4px;
+	height: 30px;
+	width: 190px
+}
+
