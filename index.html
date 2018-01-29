@@ -18,6 +18,12 @@
 <!-- 6. code to click moving gif, and click to still -->
 <!-- 7. code -->
 
+
+<!-- TO DO:
+-after a user enters a query, text entry disappears.
+-add conditional that prevents adding duplicate query buttons
+-fix error that is preventing images from populating when clicking buttons -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,7 +118,7 @@ $.ajax({
   $(document).on("click", ".queryResult", function() {
     debugger;
     var giphyQuery = $(".queryResult").attr($("data-name"));
-    
+
     for (var i = 0; i <= response.data.length; i++) {
         
         // url = response.data[i].images.original_still.url; 
