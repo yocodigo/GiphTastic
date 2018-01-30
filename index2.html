@@ -1,0 +1,191 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Explore
+ @yocodigo
+ Sign out
+ Unwatch 1
+  Star 0  Fork 0 yocodigo/GiphTastic
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
+Branch: master Find file Copy pathGiphTastic/index.html
+453d89d  4 hours ago
+ unknown GiphTastic Repo
+0 contributors
+RawBlameHistory     
+176 lines (133 sloc)  5.83 KB
+<!-- 1. CONNECT TO GIPHY API -->
+<!-- Step 2: CREATE IMG & RATING -->
+<!-- 3. RENDER BUTTON: 
+        a. When clicked, for loop. each iteration will first delete current buttons and recreate them. query data is stored in an array
+        b. var = $("<button data-value="">")
+        a. Use "$("#buttons-view").empty();" (this is necessary otherwise you will have repeat buttons) 
+        b. Array needed?-->
+<!-- 4. STORE QUERY VALUES    -->
+<!-- 4. CLICK BUTTON: -->
+<!-- Step 2: CREATE IMG & RATING -->
+<!-- 2. FORM INPUT VALUE:  
+        a. giphyQuery will be the input value, i.e. when clicking submit, function { var buttonQuery = $("<button>);, buttonQuery.attr("data-value", giphyQuery) -->
+        <!-- b. $("#giphyButtons").html(buttonQuery); -->
+          
+          <!-- a2. click event on button generates up to 10 images -->
+<!-- 3. takes input and creates button, button label, and click event appends images to gifArea.  -->
+<!-- 5. code to get image -->
+<!-- 6. code to click moving gif, and click to still -->
+<!-- 7. code -->
+
+
+<!-- TO DO:
+-after a user enters a query, text entry disappears.
+-add conditional that prevents adding duplicate query buttons
+-fix error that is preventing images from populating when clicking buttons -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <title>Giphy Homework</title>
+</head>
+<body>
+  <div class="row1">
+    <div class="col-lg-12">
+    </div>
+  </div>  
+  <div class="row">
+    <div class="col-sm-2">
+      <form>
+        <label>Enter an event</label><br>
+        <input type="text" name="Input" id="inputQuery" placeholder="i.e. birthday" value = ""><br>
+        <input type="submit" name="submit" class="submitQuery">
+      </form>
+    </div>
+    <div class="col-lg-8">
+      <div id="giphyButtons"></div>
+    </div>
+  </div>  
+  <div class="row">
+     <div id="gifArea"></div>
+  </div>
+
+<!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+/////////////////////////////////////////////////////////////////////////////    
+// GLOBAL VARIABLES
+var passQuery = "";
+var giphyQuery = "";
+var giphyArray = []; 
+/////////////////////////////////////////////////////////////////////////////
+//Step 3: STORE QUERY VALUES
+        
+  $(document).on("click", ".submitQuery", function() {
+        // By using form, the user can hit enter instead of clicking on the button  
+        event.preventDefault();
+        
+        //passQuery is assigned with the user's entry(form input value from element #inputQuery)
+        var passQuery = $("#inputQuery").val().trim();
+        
+        //Passes(pushed) the value of the users entry (form input-->passQuery) into the query array, giphyArray
+        var queryCheck = giphyArray.indexOf(passQuery);
+        //Cross-check for duplicate queries
+        console.log(queryCheck);
+        //If it is a new query, add query to array
+        if (queryCheck == -1) {
+        giphyArray.push(passQuery);
+        }
+        
+        console.log(giphyArray);
+        renderQueryButton();
+    });
+/////////////////////////////////////////////////////////////////////////////
+//Step 2: RENDER BUTTON
+      
+  function renderQueryButton() {   
+    // debugger;
+      $("#giphyButtons").empty(); 
+      for (var i = 0; i <= giphyArray.length - 1; i++) {
+          var newButton = $("<button>");
+          
+          newButton.addClass("queryResult");
+          
+          newButton.attr("data-name", giphyArray[i]);
+          
+          newButton.text(giphyArray[i]);
+          $("#giphyButtons").append(newButton);
+      }
+  }    
+/////////////////////////////////////////////////////////////////////////////
+//Step : Connect to Giphy API using Ajax
+//Step : CREATE IMG & RATING
+  $(document).on("click", ".queryResult", function() {
+    // debugger;
+    var giphyQuery = $(this).attr('data-name');
+    
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + giphyQuery + "&api_key=dc6zaTOxFJmzC&limit=10";
+    var url = "";
+          $.ajax({
+            url: queryURL,
+            method: 'GET' 
+          }).done(function(response) {
+            // console.log(response);
+         
+          for (var i = 0; i <= response.data.length - 1; i++) {
+              
+              // url = response.data[i].images.original_still.url; 
+              var ratingText = $('<p class="rating">');
+              
+              var rating = JSON.stringify(response.data[i].rating);
+              
+              ratingText.text("Rating: " + rating);
+              
+              $("#gifArea").append(ratingText);
+              
+              var newImage = $('<img class="gif notPlaying">');
+              
+              newImage.attr("src", response.data[i].images.original_still.url);
+              
+              $("#gifArea").append(newImage);
+          }    
+        
+        });
+ });
+//////////////////////////////////////////////////////////////////////////////
+//Step :    
+  $(document).on("click", ".gif", function() {
+    // console.log($(this));
+       //debugger;
+    if($(this).hasClass("notPlaying")){
+       
+        $(this).removeClass("notPlaying");
+       
+        $(this).attr('src', url.replace(/\_s.gif/i, ".gif"));
+  //console.log(url);
+    }
+    else{
+       
+         $(this).addClass('notPlaying');
+       
+        $(this).attr('src', url.replace(/\.gif/i, ".gif"))
+    }
+  
+  });
+////////////////////////////////////////////////////////////////////////////
+</script>
+</body>
+</html>
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About

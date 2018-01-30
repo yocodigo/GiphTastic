@@ -9,6 +9,7 @@ body {
 
 #gifarea {
 	float: right;
+	margin; auto;
 }
 
 .col-lg-8 {
@@ -16,8 +17,8 @@ body {
 }
 
 .queryResult {
-	padding: 20px 40px;
-	font-size: 20px;
+	padding: 10px 20px;
+	font-size: 15px;
 	margin-bottom: 5px;
 	margin-right: 5px;
 	background: #b4cef7;
@@ -26,22 +27,25 @@ body {
 }
 
 .col-sm-2 {
-	margin-left: 30px;
+	margin-left: 107px;
+	margin-right: 50px;
+
 }
 
 #giphyButtons {
+	margin-top: 15px;
 	float: left;
 	font-family: arial;
+	width: 700px;
 }
 
 label {
 	text-align: center;
 	font-family: arial;
-	font-size: 13px;
+	font-size: 15px;
 	font-weight: bold;
 	margin-bottom: 4px;
-	margin-left: 10px; 
-	letter-spacing: 6px;
+	letter-spacing: 4px;
 }
 
 .submitQuery, #inputQuery {
@@ -56,7 +60,6 @@ label {
 .submitQuery {
 	padding: 4px;
 	height: 30px;
-	width: 190px
 }
 
 .gif {
@@ -64,6 +67,28 @@ label {
 	float: right;
 }
 
-#gifarea {
-	width: 1100px;
+.col-lg-8 {
+	margin-bottom: 40px;
+}
+
+.col-lg-12 {
+	position: absolute;
+	margin-left: 155px;
+	/*left: -25px;*/
+	width: 990px;
+}
+
+p img {
+	/*position: absolute;*/
+	float: left;
+}
+
+img {
+	width: 200px;
+	height: 150px;
+	margin: 20px;
+}
+
+form, #inputQuery, .submitQuery, label {
+	width: 190px;
 }
