@@ -27,13 +27,13 @@ body {
 }
 
 .col-sm-2 {
-	margin-left: 107px;
-	margin-right: 50px;
+	margin-left: 175px;
+	margin-right: 20px;
 
 }
 
 #giphyButtons {
-	margin-top: 15px;
+	margin-top: 17px;
 	float: left;
 	font-family: arial;
 	width: 700px;
@@ -69,6 +69,7 @@ label {
 
 .col-lg-8 {
 	margin-bottom: 40px;
+	width: 600px;
 }
 
 .col-lg-12 {
@@ -90,5 +91,5 @@ img {
 }
 
 form, #inputQuery, .submitQuery, label {
-	width: 190px;
+	width: 200px;
 }

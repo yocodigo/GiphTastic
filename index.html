@@ -141,8 +141,8 @@ $(document).on('click', '.queryResult', function() {
       var rating = JSON.stringify(response.data[i].rating);
       
       ratingText.text('Rating: ' + rating);
-      
-      newDiv.text(ratingText);
+      // console.log(ratingText)
+      newDiv.html(ratingText);
 
       // $('.newDiv').append(ratingText);
       
@@ -153,6 +153,7 @@ $(document).on('click', '.queryResult', function() {
       newImage.attr('alt', 'Image not found');
 
       var url = response.data[i].images.original_still.url;
+
       newImage.attr('src', url);
       // newImage.attr('src', response.data[i].images.original_still.url);
       
