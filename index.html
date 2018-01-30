@@ -34,8 +34,7 @@
 </head>
 <body>
   <div class='row1'>
-    <div class='col-lg-12'>
-    </div>
+    <div class='col-lg-12'></div>
   </div>  
   <div class='row'>
     <div class='col-sm-2'>
@@ -54,7 +53,9 @@
      <div id='gifArea'></div>
     </div>
   </div>
-
+  <div class='row2'>
+    <div class='col-lg-12'></div>
+  </div>  
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
   <script type='text/javascript'>
@@ -120,7 +121,7 @@ $(document).on('click', '.queryResult', function() {
   // debugger;
   var giphyQuery = $(this).attr('data-name');
   
-  var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + giphyQuery + '&api_key=dc6zaTOxFJmzC&limit=10';
+  var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + giphyQuery + '&api_key=dc6zaTOxFJmzC&limit=12';
   var url = "";
 
   $.ajax({
@@ -134,30 +135,28 @@ $(document).on('click', '.queryResult', function() {
   for (var i = 0; i <= response.data.length - 1; i++) {
       url = response.data[i].images.original_still.url;      
       
+      //Add new Div
       var newDiv = $("<div class='newDiv'>");
 
+      //Add rating text
       var ratingText = $("<p class='rating'>");
-      
       var rating = JSON.stringify(response.data[i].rating);
-      
       ratingText.text('Rating: ' + rating);
-      // console.log(ratingText)
-      newDiv.html(ratingText);
-
-      // $('.newDiv').append(ratingText);
+      console.log(ratingText)
       
+      //Add rating text to new div
+      newDiv.append(ratingText);
+
+      //Add new image
       var newImage = $('<img class="gif notPlaying">');
-
-      // newImage.addClass('gif notPlaying');
-      
       newImage.attr('alt', 'Image not found');
 
       var url = response.data[i].images.original_still.url;
 
       newImage.attr('src', url);
       // newImage.attr('src', response.data[i].images.original_still.url);
-      
-      newDiv.html(newImage);      
+      newDiv.append(newImage);
+      // newDiv.html(newImage);      
 
       // $('.newDiv').append(newImage);
 
