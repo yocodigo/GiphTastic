@@ -61,84 +61,94 @@
 var passQuery = "";
 var giphyQuery = "";
 var giphyArray = []; 
-var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + giphyQuery + "&api_key=dc6zaTOxFJmzC&limit=10";
-var url = "";
 
-$.ajax({
-  url: queryURL,
-  method: 'GET' 
-}).done(function(response) {
-  // console.log(response);
-});
 
 /////////////////////////////////////////////////////////////////////////////
 //Step 3: STORE QUERY VALUES
         
   $(document).on("click", ".submitQuery", function() {
-        // By using form, the user can hit enter instead of clicking the button
-        // debugger;
+        // By using form, the user can hit enter instead of clicking on the button  
         event.preventDefault();
+        
         //passQuery is assigned with the user's entry(form input value from element #inputQuery)
         var passQuery = $("#inputQuery").val().trim();
+        
         //Passes(pushed) the value of the users entry (form input-->passQuery) into the query array, giphyArray
-       
+        var queryCheck = giphyArray.indexOf(passQuery);
+
+        //Cross-check for duplicate queries
+        console.log(queryCheck);
+
+        //If it is a new query, add query to array
+        if (queryCheck == -1) {
         giphyArray.push(passQuery);
+        }
         
         console.log(giphyArray);
 
-        renderQueryButton(); 
+        renderQueryButton();
 
-        console.log($(".queryResult"));
     });
 /////////////////////////////////////////////////////////////////////////////
 //Step 2: RENDER BUTTON
       
   function renderQueryButton() {   
     // debugger;
-    $("#giphyButtons").empty(); 
-    
-    for (var i = 0; i <= giphyArray.length - 1; i++) {
+      $("#giphyButtons").empty(); 
 
-        var newButton = $("<button>");
-        
-        newButton.addClass("queryResult");
-        
-        newButton.attr("data-name", giphyArray[i]);
-        
-        newButton.text(giphyArray[i]);
+      for (var i = 0; i <= giphyArray.length - 1; i++) {
 
-        $("#giphyButtons").append(newButton);
-    }
+          var newButton = $("<button>");
+          
+          newButton.addClass("queryResult");
+          
+          newButton.attr("data-name", giphyArray[i]);
+          
+          newButton.text(giphyArray[i]);
 
+          $("#giphyButtons").append(newButton);
+      }
   }    
 /////////////////////////////////////////////////////////////////////////////
 //Step : Connect to Giphy API using Ajax
 
 //Step : CREATE IMG & RATING
   $(document).on("click", ".queryResult", function() {
-    debugger;
-    var giphyQuery = $(".queryResult").attr($("data-name"));
+    // debugger;
+    var giphyQuery = $(this).attr('data-name');
+    
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + giphyQuery + "&api_key=dc6zaTOxFJmzC&limit=10";
+    var url = "";
 
-    for (var i = 0; i <= response.data.length; i++) {
-        
-        // url = response.data[i].images.original_still.url; 
+          $.ajax({
+            url: queryURL,
+            method: 'GET' 
+          }).done(function(response) {
+            // console.log(response);
+         
 
-        var ratingText = $('<p class="rating">');
+          for (var i = 0; i <= response.data.length - 1; i++) {
+              
+              // url = response.data[i].images.original_still.url; 
+
+              var ratingText = $('<p class="rating">');
+              
+              var rating = JSON.stringify(response.data[i].rating);
+              
+              ratingText.text("Rating: " + rating);
+              
+              $("#gifArea").append(ratingText);
+              
+              var newImage = $('<img class="gif notPlaying">');
+              
+              newImage.attr("src", response.data[i].images.original_still.url);
+              
+              $("#gifArea").append(newImage);
+          }    
         
-        var rating = JSON.stringify(response.data[i].rating);
-        
-        ratingText.text("Rating: " + rating);
-        
-        $("#gifArea").append(ratingText);
-        
-        var newImage = $('<img class="gif notPlaying">');
-        
-        newImage.attr("src", response.data[i].images.original_still.url);
-        
-        $("#gifArea").append(newImage);
-    }    
-  
-  });
+        });
+
+ });
 //////////////////////////////////////////////////////////////////////////////
 //Step :    
   $(document).on("click", ".gif", function() {
