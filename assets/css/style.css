@@ -2,25 +2,17 @@ body {
 	background-color: #e0e5f1;
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%235d9bcb' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
-
 .row1 {
 	height: 30px;
 }
-
 .row2 {
 	margin: 50px 0px;
 	height: 30px;
 }
-
 #gifarea {
 	float: right;
-	margin; auto;
+	margin: auto;
 }
-
-.col-lg-8 {
-	width: 1000px;
-}
-
 .queryResult {
 	padding: 10px 20px;
 	font-size: 15px;
@@ -30,20 +22,16 @@ body {
 	border-radius: 12px;
 	font-weight: 100;
 }
-
 .col-sm-2 {
 	margin-left: 175px;
 	margin-right: 20px;
-
 }
-
 #giphyButtons {
 	margin-top: 17px;
 	float: left;
 	font-family: arial;
 	width: 700px;
 }
-
 label {
 	text-align: center;
 	font-family: arial;
@@ -52,7 +40,6 @@ label {
 	margin-bottom: 4px;
 	letter-spacing: 4px;
 }
-
 .submitQuery, #inputQuery {
 	font-family: arial;
 	font-size: 15px;
@@ -61,44 +48,34 @@ label {
 	height: 30px;
 	letter-spacing: 2px;
 }
-
 .submitQuery {
 	padding: 4px;
 	height: 30px;
 }
-
 .gif {
 	width: 200px;
 	float: right;
 }
-
 .col-lg-8 {
 	margin-bottom: 40px;
 	width: 600px;
 }
-
 .col-lg-12 {
 	position: absolute;
 	margin-left: 135px;
-	/*left: -25px;*/
 	width: 990px;
 }
-
 .newDiv {
 	float: right;
 	margin-right: 30px;
 	margin-top: 30px;
 }
-
 p, img, .newDiv {
 	width: 200px;
 }
-
 img {
 	height: 150px;
-	/*margin: 20px;*/
 }
-
 form, #inputQuery, .submitQuery, label {
 	width: 200px;
 }
