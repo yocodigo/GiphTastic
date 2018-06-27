@@ -42,7 +42,7 @@ $(document).ready(function(){
       url: queryURL,
       method: 'GET' 
     }).done(function(response) {
-      
+      console.log(response);
       // Create image & rating 
       for (var i = 0; i <= response.data.length - 1; i++) {
         url = response.data[i].images.original_still.url;      
@@ -60,13 +60,13 @@ $(document).ready(function(){
         var url = response.data[i].images.original_still.url;
         newImage.attr('src', url);
         newDiv.append(newImage);
-        $('#gifArea').append(newDiv);
+        $('#gifArea').prepend(newDiv);
       }          
     });
 
     // On image click, alternate between still and gif
     $(document).on('click', '.gif', function() {
-      if($(this).hasClass("notPlaying")){
+      if ($(this).hasClass("notPlaying")){
         $(this).removeClass("notPlaying");
         this.src = this.src.replace(/\_s.gif/i, '.gif');
       }
